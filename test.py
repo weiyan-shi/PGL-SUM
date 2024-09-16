@@ -3,9 +3,9 @@ from modelscope.utils.constant import Tasks
 import cv2
 import os
 
-# video_path = 'dataset/PCIT-Session-r-euHPfAAiM.mp4'
-# video_path = 'dataset/interaction.mp4'
-video_path = 'https://modelscope.oss-cn-beijing.aliyuncs.com/test/videos/video_category_test_video.mp4'
+video_path = 'dataset/PCIT-Session-r-euHPfAAiM.mp4'
+# video_path = 'dataset/Talk to Your Baby.mp4'
+# video_path = 'https://modelscope.oss-cn-beijing.aliyuncs.com/test/videos/video_category_test_video.mp4'
 
 
 summarization_pipeline = pipeline(Tasks.video_summarization, model='damo/cv_googlenet_pgl-video-summarization')

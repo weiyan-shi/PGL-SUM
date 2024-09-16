@@ -1,0 +1,23 @@
+video summarization output: {'output': [{'frame': [0, 89], 'timestamps': ['00:00:00.000', '00:00:06.246']}, {'frame': [2145, 2474], 'timestamps': ['00:02:30.526', '00:02:53.614']}, {'frame': [4845, 5043], 'timestamps': ['00:05:40.000', '00:05:53.895']}]}.
+saved in dataset/5 minute skill video for PCIT-8J93iNOE43c
+
+video summarization output: {'output': [{'frame': [300, 494], 'timestamps': ['00:00:10.000', '00:00:16.467']}, {'frame': [1995, 2129], 'timestamps': ['00:01:06.500', '00:01:10.967']}]}.
+saved in dataset/Child talking by himself
+
+video summarization output: {'output': [{'frame': [0, 449], 'timestamps': ['00:00:00.000', '00:00:14.967']}, {'frame': [2115, 2174], 'timestamps': ['00:01:10.500', '00:01:12.467']}, {'frame': [2670, 2834], 'timestamps': ['00:01:29.000', '00:01:34.467']}, {'frame': [3000, 3059], 'timestamps': ['00:01:40.000', '00:01:41.967']}, {'frame': [3735, 3809], 'timestamps': ['00:02:04.500', '00:02:06.967']}, {'frame': [4395, 4544], 'timestamps': ['00:02:26.500', '00:02:31.467']}, {'frame': [5220, 5294], 'timestamps': ['00:02:54.000', '00:02:56.467']}]}.
+saved in dataset/Conversation with a 3 year old
+
+video summarization output: {'output': [{'frame': [1680, 1784], 'timestamps': ['00:00:56.000', '00:00:59.467']}, {'frame': [2430, 2669], 'timestamps': ['00:01:21.000', '00:01:28.967']}, {'frame': [3420, 3509], 'timestamps': ['00:01:54.000', '00:01:56.967']}]}.
+saved in dataset/PARCHISY parent-child interaction
+
+video summarization output: {'output': [{'frame': [0, 734], 'timestamps': ['00:00:00.000', '00:00:24.491']}, {'frame': [5160, 5234], 'timestamps': ['00:02:52.172', '00:02:54.641']}]}.
+saved in dataset/Parent_Child_Interaction_Therapy_PCIT_Effective_Treatment_Effective
+
+video summarization output: {'output': [{'frame': [2445, 2819], 'timestamps': ['00:01:21.582', '00:01:34.061']}, {'frame': [3195, 3614], 'timestamps': ['00:01:46.606', '00:02:00.587']}, {'frame': [5505, 5533], 'timestamps': ['00:03:03.684', '00:03:04.618']}]}.
+saved in dataset/See_Parent_Child_Interaction_Therapy_in_Action_Through_PCIT_demo
+
+video summarization output: {'output': [{'frame': [0, 74], 'timestamps': ['00:00:00.000', '00:00:03.083']}, {'frame': [885, 1004], 'timestamps': ['00:00:36.875', '00:00:41.833']}, {'frame': [1305, 1334], 'timestamps': ['00:00:54.375', '00:00:55.583']}, {'frame': [1395, 1454], 'timestamps': ['00:00:58.125', '00:01:00.583']}, {'frame': [2580, 2654], 'timestamps': ['00:01:47.500', '00:01:50.583']}, {'frame': [2790, 2879], 'timestamps': ['00:01:56.250', '00:01:59.958']}, {'frame': [3060, 3119], 'timestamps': ['00:02:07.500', '00:02:09.958']}, {'frame': [3360, 3404], 'timestamps': ['00:02:20.000', '00:02:21.833']}, {'frame': [3615, 3644], 'timestamps': ['00:02:30.625', '00:02:31.833']}, {'frame': [4035, 4274], 'timestamps': ['00:02:48.125', '00:02:58.083']}, {'frame': [4770, 4844], 'timestamps': ['00:03:18.750', '00:03:21.833']}, {'frame': [5100, 5174], 'timestamps': ['00:03:32.500', '00:03:35.583']}, {'frame': [5775, 5789], 'timestamps': ['00:04:00.625', '00:04:01.208']}, {'frame': [6270, 6284], 'timestamps': ['00:04:21.250', '00:04:21.833']}, {'frame': [6360, 6374], 'timestamps': ['00:04:25.000', '00:04:25.583']}, {'frame': [6585, 6629], 'timestamps': ['00:04:34.375', '00:04:36.208']}, {'frame': [7260, 7274], 'timestamps': ['00:05:02.500', '00:05:03.083']}, {'frame': [7425, 7454], 'timestamps': ['00:05:09.375', '00:05:10.583']}, {'frame': [7560, 7584], 'timestamps': ['00:05:15.000', '00:05:16.000']}]}.
+saved in dataset/Talk to Your Baby
+
+video summarization output: {'output': [{'frame': [0, 674], 'timestamps': ['00:00:00.000', '00:00:22.489']}, {'frame': [8115, 8651], 'timestamps': ['00:04:30.771', '00:04:48.655']}]}.
+saved in dataset/PCIT-Session-r-euHPfAAiM
