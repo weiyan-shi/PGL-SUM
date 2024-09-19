@@ -1,31 +1,73 @@
-from moviepy.editor import VideoFileClip
+from moviepy.editor import VideoFileClip 
 import numpy as np
 
 # 输入视频路径
 video_path = '../dataset/Talk to Your Baby.mp4'
 
-# 精华片段的时间段
+# 精华片段的时间段（替换后的关键事件时间段）
 segments = [
-    {'start': '00:00:00.000', 'end': '00:00:03.083'},
-    {'start': '00:00:36.875', 'end': '00:00:41.833'},
-    {'start': '00:00:54.375', 'end': '00:00:55.583'},
-    {'start': '00:00:58.125', 'end': '00:01:00.583'},
-    {'start': '00:01:47.500', 'end': '00:01:50.583'},
-    {'start': '00:01:56.250', 'end': '00:01:59.958'},
-    {'start': '00:02:07.500', 'end': '00:02:09.958'},
-    {'start': '00:02:20.000', 'end': '00:02:21.833'},
-    {'start': '00:02:30.625', 'end': '00:02:31.833'},
-    {'start': '00:02:48.125', 'end': '00:02:58.083'},
-    {'start': '00:03:18.750', 'end': '00:03:21.833'},
-    {'start': '00:03:32.500', 'end': '00:03:35.583'},
-    {'start': '00:04:00.625', 'end': '00:04:01.208'},
-    {'start': '00:04:21.250', 'end': '00:04:21.833'},
-    {'start': '00:04:25.000', 'end': '00:04:25.583'},
-    {'start': '00:04:34.375', 'end': '00:04:36.208'},
-    {'start': '00:05:02.500', 'end': '00:05:03.083'},
-    {'start': '00:05:09.375', 'end': '00:05:10.583'},
-    {'start': '00:05:15.000', 'end': '00:05:16.000'}
+  {
+    "title": "Checking if the child is done",
+    "start": "00:00:00",
+    "end": "00:00:03",
+    "description": "Mom: [Benjamin, are you all done?]\nMom asks if the child has finished a task, initiating interaction.\nChild: [Yeah.]\nChild responds to confirm completion."
+  },
+  {
+    "title": "Guiding polite expression",
+    "start": "00:00:03",
+    "end": "00:00:14",
+    "description": "Mom: [Can you say may?]\nMom tries to guide the child to say 'may'.\nMom: [Please.]\nContinues to guide the child to learn polite expressions.\nChild: [Bye, Mom.]\nThe child tries to respond, learning the polite expression 'bye'."
+  },
+  {
+    "title": "Asking about breakfast choice",
+    "start": "00:00:55",
+    "end": "00:00:59",
+    "description": "Mom: [Benjamin, would you like some scrambled eggs this morning?]\nMom asks about the child's breakfast preference, guiding participation in the conversation.\nChild: [Mm-hmm.]\nChild responds, showing interest in scrambled eggs."
+  },
+  {
+    "title": "Guiding participation in cooking",
+    "start": "00:01:03",
+    "end": "00:01:47",
+    "description": "Mom: [You wanna watch mama while I make them?]\nMom asks if the child wants to watch the cooking process.\nChild: [Yeah.]\nChild responds, willing to participate.\nMom: [Can you stir that for Mama?]\nMom invites the child to stir the scrambled eggs, interactive teaching.\nChild: No verbal response, but may participate through action."
+  },
+  {
+    "title": "Auditory perception interaction",
+    "start": "00:01:10",
+    "end": "00:01:27",
+    "description": "Mom: [Do you hear that sound? Do you hear the cracking noise?]\nMom asks questions to draw the child's attention to the sound, helping them perceive the environment.\nMom: [Can you say crack?]\nMom continues to guide the child to try saying 'crack'.\nChild: No clear response but may be learning the new word through observation."
+  },
+  {
+    "title": "Fruit interaction and vocabulary learning",
+    "start": "00:01:56",
+    "end": "00:02:09",
+    "description": "Mom: [Benjamin, would you like some berries while Mama makes your eggs?]\nMom asks if the child wants to eat berries, initiating a new interaction.\nMom: [Berries?]\nConfirms again, guiding the child to respond.\nChild: No response, but Mom continues reinforcing vocabulary through repetition.\nMom: [Can you say berry?]\nEncourages the child to say 'berry'.\nMom: [Do you like strawberries?]\nExpands vocabulary further by introducing 'strawberries'."
+  },
+  {
+    "title": "Cooling scrambled eggs interaction",
+    "start": "00:02:36",
+    "end": "00:02:44",
+    "description": "Mom: [Can you blow them with me?]\nMom invites the child to blow on the food together, teaching a practical life skill interactively.\nChild: No verbal response but may participate through action."
+  },
+  {
+    "title": "Sharing and refusal interaction",
+    "start": "00:02:59",
+    "end": "00:03:08",
+    "description": "Mom: [Can mama have a bite of your eggs?]\nMom asks to share food, initiating interaction.\nChild: [No.]\nChild clearly refuses, expressing their preference.\nMom: [Oh, mama's gonna eat some too.]\nMom humorously responds to the child's refusal, continuing the interaction."
+  },
+  {
+    "title": "Playful interaction",
+    "start": "00:03:08",
+    "end": "00:03:18",
+    "description": "Mom: [Can mama have a bite of your hand?]\nMom playfully interacts with the child, adding fun to the conversation.\nChild: [No.]\nChild refuses again, expressing their will.\nMom: [I'm going to eat you up.]\nMom continues the playful language to maintain engagement."
+  },
+  {
+    "title": "Finger counting interaction",
+    "start": "00:03:34",
+    "end": "00:03:56",
+    "description": "Mom: [Can you count your fingers with me while we wipe?]\nMom guides the child in counting fingers as part of a learning game.\nMom: [1, 2, 3... 9 and 10!]\nMom progressively leads the child through counting from 1 to 10, completing the interactive teaching.\nChild: May participate through action or verbal responses."
+  }
 ]
+
 
 # 加载原始视频
 video = VideoFileClip(video_path)

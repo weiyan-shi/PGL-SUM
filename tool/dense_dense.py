@@ -1,62 +1,66 @@
-import cv2
 import os
-import numpy as np
+from PIL import Image
 
-# 源文件夹路径（包含子文件夹）
-source_folder = 'dataset'
-# 目标文件夹路径（用于存放拼接后的图片）
-target_folder = 'dense_dense_dataset'
+# 原始文件夹路径
+source_folder = '/home/weiyan/Desktop/PGL-SUM/dense_dataset'
+# 输出文件夹路径
+output_folder = '/home/weiyan/Desktop/PGL-SUM/dense_dense_dataset'
 
-# 创建拼接图片的函数
-def combine_images(images, per_row=4):
-    rows = []
-    for i in range(0, len(images), per_row):
-        row_images = images[i:i + per_row]
-        # 如果图像数量不足，补齐空白图像
-        while len(row_images) < per_row:
-            row_images.append(np.zeros_like(row_images[0]))  # 添加空白图像填充
-        # 水平拼接每行图片
-        rows.append(np.hstack(row_images))
-    # 纵向拼接所有行
-    return np.vstack(rows)
+# 如果输出文件夹不存在，则创建
+if not os.path.exists(output_folder):
+    os.makedirs(output_folder)
 
-# 遍历源文件夹下的所有子文件夹
-for subfolder in os.listdir(source_folder):
-    subfolder_path = os.path.join(source_folder, subfolder)
+# 遍历每个子文件夹
+for subdir, _, files in os.walk(source_folder):
+    # 提取当前子文件夹的名字
+    current_folder_name = os.path.basename(subdir)
+    
+    segment_images = {}
 
-    # 检查是否是子文件夹
-    if os.path.isdir(subfolder_path):
-        # 创建在目标文件夹中的同名子文件夹
-        target_subfolder = os.path.join(target_folder, subfolder)
-        os.makedirs(target_subfolder, exist_ok=True)
+    # 收集相同 segment 的所有图片
+    for file in files:
+        if file.endswith(".jpg") and "segment" in file:
+            segment_number = file.split('_frame_')[0]  # 提取 segment 编号
+            if segment_number not in segment_images:
+                segment_images[segment_number] = []
+            segment_images[segment_number].append(os.path.join(subdir, file))
 
-        # 读取子文件夹中的所有图片
-        all_images = sorted([img for img in os.listdir(subfolder_path) if img.endswith('.jpg')])
-
-        # 根据 segment_{idx} 分组图片
-        segment_images = {}
-        for img_file in all_images:
-            # 假设文件名格式为 segment_{idx}_frame_{frame_num}.jpg
-            segment_idx = int(img_file.split('_')[1])
-            if segment_idx not in segment_images:
-                segment_images[segment_idx] = []
-            segment_images[segment_idx].append(img_file)
-
-        # 遍历每个 segment，并选取每隔 8 张图片进行拼接
-        for idx, images in segment_images.items():
-            selected_images = images[::8]  # 每隔 8 张选一张
-
-            images_to_combine = []
-            for img_file in selected_images:
-                img_path = os.path.join(subfolder_path, img_file)
-                img = cv2.imread(img_path)
-                images_to_combine.append(img)
-
-            # 拼接选中的图片，每行 4 张
-            combined_image = combine_images(images_to_combine, per_row=4)
-
-            # 保存拼接后的图片到目标文件夹中的同名子文件夹
-            output_filename = os.path.join(target_subfolder, f'segment_{idx}_combined.jpg')
-            cv2.imwrite(output_filename, combined_image)
-
-print(f"所有拼接的图片已保存至文件夹 {target_folder}")
+    # 合并每个 segment 对应的图片
+    for segment, image_paths in segment_images.items():
+        images = [Image.open(img) for img in image_paths]
+        
+        # 假设所有图片大小相同
+        width, height = images[0].size
+        
+        # 设置每行最多显示 5 张图片
+        images_per_row = 5
+        num_rows = (len(images) + images_per_row - 1) // images_per_row  # 计算需要多少行
+        
+        # 计算合并后的图片尺寸
+        total_width = min(len(images), images_per_row) * width  # 根据图片数量调整总宽度
+        total_height = num_rows * height  # 高度为行数乘以单张图片高度
+        
+        # 创建一个新的空白图像，用于拼接
+        new_image = Image.new('RGB', (total_width, total_height))
+        
+        # 拼接图片
+        x_offset = 0
+        y_offset = 0
+        for i, img in enumerate(images):
+            new_image.paste(img, (x_offset, y_offset))
+            x_offset += width
+            
+            # 每 5 张图片换一行
+            if (i + 1) % images_per_row == 0:
+                x_offset = 0
+                y_offset += height
+        
+        # 输出图片的子文件夹，名字与当前子文件夹名字相同
+        output_subdir = os.path.join(output_folder, current_folder_name)
+        if not os.path.exists(output_subdir):
+            os.makedirs(output_subdir)
+        
+        # 保存合并后的图片
+        output_image_path = os.path.join(output_subdir, f'{segment}_combined.jpg')
+        new_image.save(output_image_path)
+        print(f'Saved {output_image_path}')
