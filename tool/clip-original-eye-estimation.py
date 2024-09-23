@@ -1,13 +1,17 @@
 import json
 import numpy as np
-from moviepy.editor import VideoFileClip, TextClip, CompositeVideoClip
+from moviepy.editor import VideoFileClip, TextClip, CompositeVideoClip, AudioFileClip
 
 # 加载原始视频
 video_path = "/home/weiyan/Desktop/MCGaze/MCGaze_demo/output_video.mp4"
 video = VideoFileClip(video_path)
 
+# 加载外部音频
+audio_path = "/home/weiyan/Desktop/PGL-SUM/dataset/Talk to Your Baby/Talk to Your Baby.wav"
+audio = AudioFileClip(audio_path)
+
 # 从 key-event.json 读取片段信息
-with open('/home/weiyan/Desktop/PGL-SUM/dataset/5 minute skill video for PCIT-8J93iNOE43c/key-event.json', 'r') as f:
+with open('/home/weiyan/Desktop/PGL-SUM/dataset/Talk to Your Baby/key-event.json', 'r') as f:
     segments = json.load(f)
 
 # 将时间戳转换为秒，方便处理
@@ -22,7 +26,7 @@ def add_highlight_mask(frame, t, segments):
         if start_time <= t <= end_time:
             # 添加透明黄色蒙版
             mask = np.full_like(frame, (255, 255, 0), dtype=np.uint8)  # 黄色蒙版
-            return (frame * 0.5 + mask * 0.5).astype('uint8')  # 50%透明度
+            return (frame * 0.7 + mask * 0.3).astype('uint8')  # 50%透明度
     return frame
 
 # 创建标题叠加函数
@@ -45,13 +49,16 @@ def add_title_clip(clip, segments):
     return CompositeVideoClip(clips, size=clip.size)
 
 # 对整个视频应用高亮蒙版，保留音频
-highlighted_video = video.fl(lambda gf, t: add_highlight_mask(gf(t), t, segments)).set_audio(video.audio)
+highlighted_video = video.fl(lambda gf, t: add_highlight_mask(gf(t), t, segments))
 
 # 添加标题叠加效果
 annotated_video = add_title_clip(highlighted_video, segments)
 
+# 将外部音频与视频结合
+final_video = annotated_video.set_audio(audio)
+
 # 输出视频，确保音频保留
-output_path = '/home/weiyan/Desktop/PGL-SUM/dataset/5 minute skill video for PCIT-8J93iNOE43c/5 minute skill video for PCIT-8J93iNOE43c-annotated_video.mp4'
-annotated_video.write_videofile(output_path, codec="libx264", audio_codec="aac")
+output_path = '/home/weiyan/Desktop/PGL-SUM/dataset/Talk to Your Baby/Talk to Your Baby-annotated_eye.mp4'
+final_video.write_videofile(output_path, codec="libx264", audio_codec="aac")
 
 print(f"标注视频已保存至 {output_path}")
