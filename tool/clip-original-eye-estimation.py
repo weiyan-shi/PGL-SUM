@@ -7,11 +7,11 @@ video_path = "/home/weiyan/Desktop/MCGaze/MCGaze_demo/output_video.mp4"
 video = VideoFileClip(video_path)
 
 # 加载外部音频
-audio_path = "/home/weiyan/Desktop/PGL-SUM/dataset/Talk to Your Baby/Talk to Your Baby.wav"
+audio_path = "/home/weiyan/Desktop/PGL-SUM/dataset/Parent_Child_Interaction_Therapy_PCIT_Effective_Treatment_Effective/Parent_Child_Interaction_Therapy_PCIT_Effective_Treatment_Effective.wav"
 audio = AudioFileClip(audio_path)
 
 # 从 key-event.json 读取片段信息
-with open('/home/weiyan/Desktop/PGL-SUM/dataset/Talk to Your Baby/key-event.json', 'r') as f:
+with open('/home/weiyan/Desktop/PGL-SUM/dataset/Parent_Child_Interaction_Therapy_PCIT_Effective_Treatment_Effective/key-event.json', 'r') as f:
     segments = json.load(f)
 
 # 将时间戳转换为秒，方便处理
@@ -58,7 +58,7 @@ annotated_video = add_title_clip(highlighted_video, segments)
 final_video = annotated_video.set_audio(audio)
 
 # 输出视频，确保音频保留
-output_path = '/home/weiyan/Desktop/PGL-SUM/dataset/Talk to Your Baby/Talk to Your Baby-annotated_eye.mp4'
+output_path = '/home/weiyan/Desktop/PGL-SUM/dataset/Parent_Child_Interaction_Therapy_PCIT_Effective_Treatment_Effective/Parent_Child_Interaction_Therapy_PCIT_Effective_Treatment_Effective-annotated_eye.mp4'
 final_video.write_videofile(output_path, codec="libx264", audio_codec="aac")
 
 print(f"标注视频已保存至 {output_path}")
